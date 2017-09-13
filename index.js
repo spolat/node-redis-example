@@ -54,6 +54,23 @@ app.get("/storedHash/:hashSetName", function(req,res){
     });
 });
 
+// Storing List
+app.post("/storeList", function(req,res){
+    client.rpush(["list", "name", req.body.tech1, req.body.tech2, req.body.tech3], function(err,reply){
+        if(err) return res.status(500).json(err);
+        // It will return 3
+        return res.status(200).json(reply);
+    });
+});
+
+// Get stored list
+app.post("/StoredList", function(req,res){
+    client.lrange(req.body.listName, req.body.start, req.body.stop , function(err,reply){
+        if(err) return res.status(500).json(err);
+        return res.status(200).json(reply);
+    });
+});
+
 app.listen(3000, function () {
     console.log("app listening on port 3000");
 });
