@@ -37,6 +37,23 @@ app.get("/storedString/:value", function (req, res) {
     });
 });
 
+// Storing hash
+app.post("/storeHash", function (req, res) {
+    client.hmset("hashSetName", "name", req.body.name, "lastname", req.body.lastname, "location", req.body.location, function (err, reply) {
+        if(err) return res.status(500).send(err);
+        return res.status(200).send(reply);
+    });
+});
+
+// Get Stored Hash
+app.get("/storedHash/:hashSetName", function(req,res){
+    const hasthSetName = req.param("hashSetName");
+    client.hgetall(hasthSetName, function(err,reply){
+        if(err) return res.status(500).json(err);
+        else return res.status(200).json(reply);
+    });
+});
+
 app.listen(3000, function () {
     console.log("app listening on port 3000");
 });
