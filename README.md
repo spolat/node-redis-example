@@ -1,4 +1,4 @@
-# A simple nodejs-redis tutorial for beginners like me :)
+# A simple nodejs-redis tutorial for beginners
 
 ## Strings
 
