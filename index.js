@@ -71,6 +71,22 @@ app.post("/StoredList", function(req,res){
     });
 });
 
+// Stroing Sets
+app.post("/storeSet", function(req,res){
+    client.sadd(["setName", req.body.tech1, req.body.tech2, req.body.tech3], function(err,reply){
+        if(err) return res.status(500).json(err);
+        return res.status(200).json(reply);
+    });
+});
+
+// Get Strored Set
+app.get("/storedSet/:setName", function(req,res){
+    client.smembers(req.param("setName"),function(err,reply){
+        if(err) return res.status(500).json(err);
+        return res.status(200).json(reply);
+    });
+});
+
 app.listen(3000, function () {
     console.log("app listening on port 3000");
 });
