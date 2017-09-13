@@ -109,6 +109,14 @@ app.post("/increment",function(req,res){
     });
 });
 
+// Check Exists a value
+app.post("/checkExist", function(req,res){
+    client.exists(req.body.value, function(err,reply){
+        if(reply === 1) return res.status(200).json("exists");
+        return res.status(404).json("not found");
+    });
+});
+
 app.listen(3000, function () {
     console.log("app listening on port 3000");
 });
