@@ -87,6 +87,28 @@ app.get("/storedSet/:setName", function(req,res){
     });
 });
 
+// Increment a value
+app.post("/increment",function(req,res){
+    // First add a value
+    let watch = {};
+    client.set("value", req.body.value,function(err,reply){
+        watch.before = req.body.value;
+        if(err) console.log(err)
+        else{
+            // Then increment value
+            client.incr("value", function(err,reply){
+                if(err) return res.status(500).json(err);
+                // Then get incremented value
+                client.get("value", function(err,reply){
+                    if(err) return console.log("2; " + err)
+                    watch.after = reply;
+                    return res.status(200).json(watch);
+                });
+            });
+        }
+    });
+});
+
 app.listen(3000, function () {
     console.log("app listening on port 3000");
 });
