@@ -1,5 +1,7 @@
 # A simple nodejs-redis tutorial for beginners
 
+![alt text](http://www.nikola-breznjak.com/blog/wp-content/uploads/2015/02/NodeRedis.jpg)
+
 ## Strings
 
 String is the basic data type supported by Redis. You can set the string value of a key, and you can get the string value of a key using SET and GET commands.
